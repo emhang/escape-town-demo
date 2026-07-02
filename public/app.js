@@ -42,12 +42,16 @@ const itemInput = document.getElementById("itemInput");
 const userText = document.getElementById("userText");
 const clearBtn = document.getElementById("clearBtn");
 const actionForm = document.getElementById("actionForm");
+const themeToggle = document.getElementById("themeToggle");
+const themeToggleText = document.getElementById("themeToggleText");
 let streamingBubble = null;
 let streamingText = "";
 
 init();
 
 function init() {
+  initTheme();
+
   npcRoster.forEach((npc) => {
     const option = document.createElement("option");
     option.value = npc.id;
@@ -71,6 +75,24 @@ function init() {
   clearBtn.addEventListener("click", () => {
     chatLog.innerHTML = "";
   });
+}
+
+function initTheme() {
+  const savedMode = localStorage.getItem("escape-town-theme");
+  const useDark = savedMode === "dark" || savedMode === "mono";
+  setThemeMode(useDark);
+
+  themeToggle.addEventListener("change", () => {
+    setThemeMode(themeToggle.checked);
+  });
+}
+
+function setThemeMode(useDark) {
+  document.body.classList.toggle("dark-mode", useDark);
+  themeToggle.checked = useDark;
+  themeToggleText.textContent = useDark ? "浅色模式" : "深色模式";
+  themeToggle.setAttribute("aria-label", useDark ? "切换到浅色模式" : "切换到深色模式");
+  localStorage.setItem("escape-town-theme", useDark ? "dark" : "soft");
 }
 
 function renderPanels() {
