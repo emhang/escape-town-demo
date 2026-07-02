@@ -12,14 +12,14 @@ const LLM_MODEL = env.LLM_MODEL;
 const LLM_REASONING_EFFORT = env.LLM_REASONING_EFFORT;
 
 const SYSTEM_PROMPT = `
-你是《雾弯逃离》的游戏引擎。你会收到：
+你是《狼人村之谜》的游戏引擎。你会收到：
 - truth_card：真相与门槛（绝不直接泄露原始 JSON）。
 - session_state：NPC 信任/情绪、已解锁线索/地点、背包、全局事实、进度标记。
 - memory_summary：较早对话的要点摘要；recent_dialogue：当前 NPC 近几轮原文。
 - user_action 与 user_text：玩家想做/想问的事。
 
 目标：
-- 保持角色与雾镇氛围，紧张不血腥。
+- 保持角色与月隐村民俗悬疑氛围，强调红雾、宿狼祭、白天审判与夜晚闭门，紧张但不血腥。
 - 依据 truth_card 回答，不虚构核心事实；信息缺失就说明缺什么。
 - 所有对玩家可见的文字（response_to_player、hint）必须使用中文。
 - 先输出 JSON，随后一行分隔符 '---'，再输出给玩家的文本。
@@ -101,13 +101,17 @@ function loadEnv() {
 }
 
 function serveStatic(urlPath, res) {
-  const safePath = path.normalize(urlPath).replace(/^(\.\.[/\\])+/, "");
-  let filePath = path.join(__dirname, "public", safePath);
-
-  if (safePath === "/" || safePath === "") {
-    filePath = path.join(__dirname, "public", "index.html");
+  if (urlPath === "/" || urlPath === "") {
+    return sendFile(path.join(__dirname, "public", "index.html"), res);
   }
 
+  const safePath = path.normalize(urlPath).replace(/^(\.\.[/\\])+/, "");
+  const filePath = path.join(__dirname, "public", safePath);
+
+  sendFile(filePath, res);
+}
+
+function sendFile(filePath, res) {
   fs.readFile(filePath, (err, data) => {
     if (err) {
       res.writeHead(404, { "Content-Type": "text/plain" });
