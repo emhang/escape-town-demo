@@ -101,12 +101,12 @@ function loadEnv() {
 }
 
 function serveStatic(urlPath, res) {
-  if (urlPath === "/" || urlPath === "") {
-    return sendFile(path.join(__dirname, "public", "index.html"), res);
-  }
-
-  const safePath = path.normalize(urlPath).replace(/^(\.\.[/\\])+/, "");
-  const filePath = path.join(__dirname, "public", safePath);
+  const requestedPath = urlPath === "/" ? "index.html" : urlPath;
+  const safePath = path
+    .normalize(requestedPath)
+    .replace(/^(\.\.[/\\])+/, "")
+    .replace(/^[/\\]+/, "");
+  const filePath = path.join(__dirname, "public", safePath || "index.html");
 
   sendFile(filePath, res);
 }
