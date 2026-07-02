@@ -3,7 +3,8 @@ const npcRoster = [
   { id: "dj", name: "守夜歌者阿铃", blurb: "会唱古老守夜歌，总用歌词试探外来者。" },
   { id: "innkeeper", name: "客栈老板娘柳婶", blurb: "热络精明，账本里藏着被撕掉的一夜。" },
   { id: "cop", name: "巡山人白峭", blurb: "负责夜巡与封路，腰间挂着旧名册。" },
-  { id: "kid", name: "跑腿少年小芦", blurb: "熟悉暗路，袖口沾着木炭狼爪印。" }
+  { id: "kid", name: "跑腿少年小芦", blurb: "熟悉暗路，袖口沾着木炭狼爪印。" },
+  { id: "clockmaker", name: "守钟匠石晷", blurb: "看守祠钟与木铃，记得月蚀夜每一次报时。" }
 ];
 
 const starterClues = [
