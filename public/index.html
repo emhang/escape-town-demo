@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fogbound Escape - MVP</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <div>
+          <h1>雾弯逃离</h1>
+          <p class="subtitle">LLM 驱动的逃脱小镇演示</p>
+        </div>
+        <div class="pill">演示版</div>
+      </header>
+
+      <main class="layout">
+        <section class="chat-panel">
+          <div class="chat-log" id="chatLog"></div>
+        </section>
+
+        <aside class="side-panel">
+          <div class="card">
+            <h3>NPC</h3>
+            <div id="npcList"></div>
+          </div>
+          <div class="card">
+            <h3>线索与地点</h3>
+            <ul id="clueList"></ul>
+            <ul id="locationList"></ul>
+          </div>
+          <div class="card">
+            <h3>背包与已知</h3>
+            <ul id="inventoryList"></ul>
+            <ul id="factsList"></ul>
+          </div>
+          <div class="card hint-card" id="hintCard" hidden>
+            <h3>提示</h3>
+            <p id="hintText"></p>
+          </div>
+        </aside>
+      </main>
+
+      <section class="input-panel">
+        <form id="actionForm">
+          <div class="controls">
+            <label>
+              对话对象
+              <select id="targetSelect">
+                <option value="">（自由叙述）</option>
+              </select>
+            </label>
+            <label>
+              意图
+              <select id="intentSelect">
+                <option value="ask">提问</option>
+                <option value="offer">馈赠/帮助</option>
+                <option value="observe">观察</option>
+                <option value="move">移动</option>
+                <option value="submit_verdict">提交推理</option>
+              </select>
+            </label>
+            <label>
+              语气
+              <input id="toneInput" type="text" placeholder="温和、直接、好奇…" />
+            </label>
+            <label>
+              携带物
+              <input id="itemInput" type="text" placeholder="咖啡、糖果、钥匙…" />
+            </label>
+          </div>
+          <div class="controls">
+            <label class="full">
+              你的行动 / 话语
+              <textarea id="userText" rows="2" placeholder="提问、行动，或提交推理…"></textarea>
+            </label>
+          </div>
+          <div class="controls">
+            <button type="submit">发送</button>
+            <button type="button" id="clearBtn">清空记录</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

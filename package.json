@@ -1,0 +1,10 @@
+{
+  "name": "escape-town-demo",
+  "version": "0.1.0",
+  "description": "LLM-driven escape town MVP with structured responses.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT"
+}
